@@ -42,7 +42,7 @@ exports.blogfind = async function (req, res, next) {
 
 // blog findone
 exports.blogfindone = async function (req, res, next) {
-    try { 
+    try {
         let formdata = req.body
         let blogfindone = await BLOG.findById(req.params.findId)
 
@@ -81,8 +81,8 @@ exports.blogdelete = async function (req, res, next) {
 // blog update
 exports.blogupdate = async function (req, res, next) {
     try {
-        let formdata = req.body
-        let blogUpdate = await BLOG.findByIdAndUpdate(req.params.UpdateId, formdata)
+        req.body.image = req.file.filename
+        let blogUpdate = await BLOG.findByIdAndUpdate(req.params.UpdateId, req.body)
         res.status(201).json({
             status: "success",
             message: "blog update successfully",
